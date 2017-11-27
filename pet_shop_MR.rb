@@ -18,19 +18,21 @@ def increase_pets_sold(pet_shop, sold)
   pet_shop[:admin][:pets_sold] = pets_sold(pet_shop) + sold
 end
 
+def pets_in_stock(pet_shop)
+  return pet_shop[:pets]
+end
+
 def stock_count(pet_shop)
   return pet_shop[:pets].length
 end
 
 def pets_by_breed(pet_shop, breed)
-  for pets in pet_shop
-    if pets[:breed] == breed
-      return pets.count
-    end
+  matches = []
+  for pet in pets_in_stock(pet_shop)
+    matches << pet if(pet[:breed] == breed)
   end
-  return 0
+  return matches
 end
-
 
 def find_pet_by_name(pet_shop, pet_name)
   for pets in pet_shop[:pets]
